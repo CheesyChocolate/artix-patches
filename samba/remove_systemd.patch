@@ -1,0 +1,47 @@
+From ed6927407a1926b325ca79c3b029c5803c71fd43 Mon Sep 17 00:00:00 2001
+From: LemonPie <lemonpie@artixlinux.org>
+Date: Mon, 27 Nov 2023 19:53:05 +0000
+Subject: [PATCH] remove systemd in PKGBUILD
+
+---
+ PKGBUILD | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
+
+diff --git a/PKGBUILD b/PKGBUILD
+index 37b638e..9535c33 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -16,7 +16,7 @@ url="https://www.samba.org"
+ license=('GPL-3.0-or-later')
+ makedepends=('python' 'python-markdown' 'python-dnspython' 'docbook-xsl' 'pkg-config' 'libbsd' 'popt' 'libcups'
+              'readline' 'tevent' 'acl' 'libldap' 'libcap' 'ldb' 'krb5' 'pam'
+-             'systemd' 'gnutls' 'talloc' 'tdb' 'dbus' 
++             'gnutls' 'talloc' 'tdb' 'dbus'
+              'perl-parse-yapp' 'libnsl' 'libtirpc' 'rpcsvc-proto' 'jansson'
+              'liburing' 'perl-json' 'glusterfs')
+ optdepends=(
+@@ -61,8 +61,7 @@ build() {
+               --with-ldap \
+               --with-winbind \
+               --with-acl-support \
+-              --with-systemd \
+-              --systemd-install-services \
++              --without-systemd \
+               --with-pam \
+               --with-pammodulesdir=/usr/lib/security \
+               --bundled-libraries=!tdb,!talloc,!pytalloc-util,!tevent,!popt,!ldb,!pyldb-util \
+@@ -179,11 +178,6 @@ sys.path.insert(0, '/usr/lib/python${_pyver}/site-packages')" \
+                "${pkgdir}"/usr/${script}
+     done
+ 
+-  # packaging/wscript_build to use /etc/conf.d
+-  sed -i -e '/^EnvironmentFile/ s/sysconfig/conf.d/' "${pkgdir}"/usr/lib/systemd/system/*.service
+-  install -d -m755  "${pkgdir}"/etc/conf.d
+-  install -m644 "${srcdir}"/samba-${pkgver}/packaging/systemd/samba.sysconfig "${pkgdir}"/etc/conf.d/samba
+-
+   # create ephemeral dirs via tmpfiles rather than shipping them in package
+   install -D -m644 "${srcdir}"/samba.conf "${pkgdir}"/usr/lib/tmpfiles.d/samba.conf
+   # create config dir
+-- 
+2.43.0
+
