@@ -102,8 +102,6 @@ for package in $packageBasenames; do
 		    u | undo)
 			    # Undo changes
 			    (cd "${PACKAGE_TREE}/${package}" && git reset --hard HEAD)
-			    # return to the workspace directory
-			    cd "$WORKSPACE_DIR" || exit 1
 			    break
 			    ;;
 		    s | skip)
