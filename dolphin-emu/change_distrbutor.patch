@@ -1,0 +1,25 @@
+From e58df156ca9cfe6ddae1e3a720e89fdf3b891fe9 Mon Sep 17 00:00:00 2001
+From: LemonPie <lemonpie@artixlinux.org>
+Date: Fri, 1 Dec 2023 19:16:20 +0000
+Subject: [PATCH] change distributor to artuxlinux.org
+
+---
+ PKGBUILD | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/PKGBUILD b/PKGBUILD
+index 247609b..9eacd3f 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -108,7 +108,7 @@ build() {
+   cmake -S dolphin-emu -B build -G Ninja \
+     -DCMAKE_BUILD_TYPE=None \
+     -DCMAKE_INSTALL_PREFIX=/usr \
+-    -DDISTRIBUTOR=archlinux.org \
++    -DDISTRIBUTOR=artixlinux.org \
+     -DENABLE_TESTS=OFF \
+     -DUSE_MGBA=ON \
+     -Wno-dev
+-- 
+2.43.0
+
