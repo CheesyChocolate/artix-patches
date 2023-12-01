@@ -1,0 +1,24 @@
+From 1aac0fd4bf633fec9923c99502daf31eae3cfe72 Mon Sep 17 00:00:00 2001
+From: LemonPie <lemonpie@artixlinux.org>
+Date: Fri, 1 Dec 2023 00:13:22 +0000
+Subject: [PATCH] disable systemd support in PKGBUILD
+
+---
+ PKGBUILD | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/PKGBUILD b/PKGBUILD
+index 1e25660..2db2019 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -64,6 +64,7 @@ build() {
+     --sbindir=/usr/bin \
+     --sysconfdir=/etc \
+     --disable-schemas-compile \
++    --disable-systemd \
+     --disable-sysconfig
+   make
+ }
+-- 
+2.43.0
+

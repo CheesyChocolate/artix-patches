@@ -1,0 +1,31 @@
+From b6ecc89d5b6752f4251920042781af8609d44b61 Mon Sep 17 00:00:00 2001
+From: LemonPie <lemonpie@artixlinux.org>
+Date: Fri, 1 Dec 2023 00:07:12 +0000
+Subject: [PATCH] do not use pkgver() function
+
+---
+ PKGBUILD | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/PKGBUILD b/PKGBUILD
+index a2bc880..1e893d0 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -51,10 +51,10 @@ prepare() {
+   NOCONFIGURE=true ./autogen.sh
+ }
+ 
+-pkgver() {
+-  cd firewalld
+-  git describe --tags | sed 's/^v//'
+-}
++# pkgver() {
++#   cd firewalld
++#   git describe --tags | sed 's/^v//'
++# }
+ 
+ build() {
+   cd firewalld
+-- 
+2.43.0
+
