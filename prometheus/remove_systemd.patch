@@ -1,36 +1,46 @@
-From 723e9abd3f3e703656c895b925d42e94d21d6f1a Mon Sep 17 00:00:00 2001
+From a79ae1374b80b9b8fa096501a67eca543f596084 Mon Sep 17 00:00:00 2001
 From: LemonPie <lemonpie@artixlinux.org>
-Date: Thu, 30 Nov 2023 22:32:42 +0000
-Subject: [PATCH] remove systemd service file from PKGBUILD
+Date: Fri, 1 Dec 2023 00:03:21 +0000
+Subject: [PATCH] remove systemd service file and conf.d file from PKGBUILD
 
 ---
- PKGBUILD | 3 ---
- 1 file changed, 3 deletions(-)
+ PKGBUILD | 12 +++---------
+ 1 file changed, 3 insertions(+), 9 deletions(-)
 
 diff --git a/PKGBUILD b/PKGBUILD
-index fe74a1a..4dcdb8d 100644
+index fe74a1a..b48c674 100644
 --- a/PKGBUILD
 +++ b/PKGBUILD
-@@ -17,12 +17,10 @@ options=(!lto)
- backup=('etc/prometheus/prometheus.yml' 'etc/conf.d/prometheus')
+@@ -14,17 +14,13 @@ depends=('glibc')
+ makedepends=('go' 'git' 'npm' 'nodejs' 'yamllint' 'typescript' 'yarn')
+ 
+ options=(!lto)
+-backup=('etc/prometheus/prometheus.yml' 'etc/conf.d/prometheus')
++backup=('etc/prometheus/prometheus.yml')
  
  source=("prometheus-v$pkgver.tar.gz::https://github.com/prometheus/prometheus/archive/v$pkgver.tar.gz"
 -        prometheus.service
-         prometheus.sysusers
-         prometheus.conf)
+-        prometheus.sysusers
+-        prometheus.conf)
++        prometheus.sysusers)
  
  sha256sums=('1a7981c792bdebe8a09103a3ced63375593603c2ccd39cad236037e70628b104'
 -            'f358986865bd3d06dc47a265aeb3b5ef64aa644e831f07731c2fc7af64d9e98f'
-             '2747fabb4e56b808361eb7dd7acf9729ab8973d1ebe2f857dd56f6c71f71e45f'
-             '6d32deb125381cbebac11b6953a7d9a65eb7e50f209dc1e22c63facf678a3070')
+-            '2747fabb4e56b808361eb7dd7acf9729ab8973d1ebe2f857dd56f6c71f71e45f'
+-            '6d32deb125381cbebac11b6953a7d9a65eb7e50f209dc1e22c63facf678a3070')
++            '2747fabb4e56b808361eb7dd7acf9729ab8973d1ebe2f857dd56f6c71f71e45f')
  
-@@ -65,7 +63,6 @@ check() {
+ build() {
+   cd prometheus-$pkgver
+@@ -65,9 +61,7 @@ check() {
  }
  
  package() {
 -  install -Dm644 prometheus.service "$pkgdir"/usr/lib/systemd/system/prometheus.service
    install -Dm644 prometheus.sysusers "$pkgdir"/usr/lib/sysusers.d/prometheus.conf
-   install -Dm644 prometheus.conf "${pkgdir}"/etc/conf.d/prometheus
+-  install -Dm644 prometheus.conf "${pkgdir}"/etc/conf.d/prometheus
+ 
+   cd prometheus-$pkgver
  
 -- 
 2.43.0
