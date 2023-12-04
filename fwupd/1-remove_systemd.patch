@@ -1,0 +1,40 @@
+From 66311824fd210f18dad65aa4058e1b432b1cb4d9 Mon Sep 17 00:00:00 2001
+From: LemonPie <lemonpie@artixlinux.org>
+Date: Mon, 4 Dec 2023 21:57:23 +0000
+Subject: [PATCH] change mason options to disable systemd and enable elogind
+
+idk why we need to remove the msr module-load config, but it works
+---
+ PKGBUILD | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+
+diff --git a/PKGBUILD b/PKGBUILD
+index 9bcce08..3ba70ab 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -72,8 +72,10 @@ build() {
+     -D launchd=disabled \
+     -D plugin_intel_spi=true \
+     -D supported_build=enabled \
+-    -D efi_binary=false \
+-    -D systemd_unit_user=fwupd
++    -D systemd=disabled \
++    -D offline=disabled \
++    -D elogind=enabled \
++    -D efi_binary=false
+   meson compile -C build
+ }
+ 
+@@ -114,9 +116,6 @@ package_fwupd() {
+   rm -r "${pkgdir}"/usr/share/installed-tests/
+   mv "${pkgdir}"/usr/bin/{,fwupd-}dbxtool
+   mv "${pkgdir}"/usr/share/man/man1/{,fwupd-}dbxtool.1
+-  # Remove msr module-load config as it is built-in
+-  rm "${pkgdir}"/usr/lib/modules-load.d/fwupd-msr.conf
+-  rmdir "${pkgdir}"/usr/lib/modules-load.d
+ 
+   _pick docs "${pkgdir}"/usr/share/doc/{,fwupd/}{libfwupdplugin,libfwupd}
+ }
+-- 
+2.43.0
+
