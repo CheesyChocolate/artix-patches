@@ -85,7 +85,7 @@ for package in $packageBasenames; do
     if [ -d "${WORKSPACE_DIR}/artix-patches/${package}" ]; then
 	    echo "Applying patches for $package ..."
 	    cd "${PACKAGE_TREE}/${package}" || exit 1
-	    git apply "${WORKSPACE_DIR}/artix-patches/${package}"/*.patch
+	    git apply --apply "${WORKSPACE_DIR}/artix-patches/${package}"/*.patch
 	    git --no-pager diff
     fi
 
