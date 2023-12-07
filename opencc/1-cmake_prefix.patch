@@ -1,0 +1,25 @@
+From 62c1f9d5b016380e364fb40ff66eaed00c7c0310 Mon Sep 17 00:00:00 2001
+From: LemonPie <lemonpie@artixlinux.org>
+Date: Thu, 7 Dec 2023 20:28:23 +0000
+Subject: [PATCH] adding cmake_prefix_path to build() in PKGBUILD
+
+---
+ PKGBUILD | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/PKGBUILD b/PKGBUILD
+index adf5577..cf80127 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -23,7 +23,7 @@ build() {
+   cmake -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_DOCUMENTATION:BOOL=ON -DBUILD_PYTHON:BOOL=ON \
+         -DUSE_SYSTEM_MARISA:BOOL=ON -DUSE_SYSTEM_PYBIND11:BOOL=ON -DUSE_SYSTEM_RAPIDJSON:BOOL=ON \
+         -DUSE_SYSTEM_TCLAP:BOOL=ON -DUSE_SYSTEM_DARTS:BOOL=ON -DENABLE_GTEST:BOOL=ON \
+-        -DUSE_SYSTEM_GTEST:BOOL=ON
++        -DUSE_SYSTEM_GTEST:BOOL=ON -DCMAKE_PREFIX_PATH=/usr
+   make
+ 
+   cp opencc_clib.*.so python/opencc/clib/
+-- 
+2.43.0
+
