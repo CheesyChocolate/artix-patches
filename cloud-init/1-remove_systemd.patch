@@ -1,0 +1,38 @@
+From e9c6774adb5c0f4b80561e587516b6f10b9dfde4 Mon Sep 17 00:00:00 2001
+From: LemonPie <lemonpie@artixlinux.org>
+Date: Fri, 8 Dec 2023 15:42:01 +0000
+Subject: [PATCH] remove systemd from PKGBUILD
+
+---
+ PKGBUILD | 10 ----------
+ 1 file changed, 10 deletions(-)
+
+diff --git a/PKGBUILD b/PKGBUILD
+index 9a9f090..c937353 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -28,7 +28,6 @@ depends=(
+   python-requests
+   python-typing-extensions
+   sudo
+-  systemd
+ )
+ makedepends=(
+   netplan
+@@ -109,13 +108,4 @@ package() {
+   install -vDm 655 bash_completion/$pkgname -t "$pkgdir/usr/share/bash-completion/completions/"
+   # udev rules
+   install -vDm 644 udev/*.rules -t "$pkgdir/usr/lib/udev/rules.d/"
+-  # systemd integration
+-  install -vdm 755 "$pkgdir/usr/lib/systemd/system"{,-generators}
+-  for _file in cloud-{config,final,init-local,init}.service; do
+-    ./tools/render-template --variant arch ./systemd/$_file.tmpl "$pkgdir/usr/lib/systemd/system/$_file"
+-  done
+-  install -vDm 644 systemd/*.{service,socket,target} "$pkgdir/usr/lib/systemd/system/"
+-  ./tools/render-template --variant arch ./systemd/cloud-init-generator.tmpl "$pkgdir/usr/lib/systemd/system-generators/cloud-init-generator"
+-  chmod 755 "$pkgdir/usr/lib/systemd/system-generators/cloud-init-generator"
+-  install -vDm 644 systemd/disable-sshd-keygen-if-cloud-init-active.conf -t "$pkgdir/usr/lib/systemd/system/sshd-keygen@.service.d/"
+ }
+-- 
+2.43.0
+

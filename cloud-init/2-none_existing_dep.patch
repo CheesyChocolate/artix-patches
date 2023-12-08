@@ -1,0 +1,34 @@
+From 1e4864d0399d7d1b7bc2526267ce6359b1af29dc Mon Sep 17 00:00:00 2001
+From: LemonPie <lemonpie@artixlinux.org>
+Date: Fri, 8 Dec 2023 15:43:14 +0000
+Subject: [PATCH] remove optional dependency that does not exist in artixlinux
+
+---
+ PKGBUILD | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/PKGBUILD b/PKGBUILD
+index c937353..8325be5 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -30,7 +30,7 @@ depends=(
+   sudo
+ )
+ makedepends=(
+-  netplan
++  # netplan
+   python-build
+   python-installer
+   python-setuptools
+@@ -46,7 +46,7 @@ checkdepends=(
+ )
+ optdepends=(
+   'cloud-guest-utils: for growpart'
+-  'netplan: for configuring network using netplan'
++  # 'netplan: for configuring network using netplan'
+   'python-passlib: for Azure and BSD support'
+   'python-urllib3: for LXD and Scaleway data sources'
+ )
+-- 
+2.43.0
+
